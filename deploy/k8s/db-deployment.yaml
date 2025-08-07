@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ludo-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ludo-db
+  template:
+    metadata:
+      labels:
+        app: ludo-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_USER
+              value: ludo
+            - name: POSTGRES_PASSWORD
+              value: ludo
+            - name: POSTGRES_DB
+              value: ludo
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: db-data
+          emptyDir: {}

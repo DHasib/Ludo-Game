@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ludo-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ludo-frontend
+  template:
+    metadata:
+      labels:
+        app: ludo-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ludo-frontend:latest
+          ports:
+            - containerPort: 80

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ludo-backend
+spec:
+  selector:
+    app: ludo-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

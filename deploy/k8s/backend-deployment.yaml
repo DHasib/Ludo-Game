@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ludo-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ludo-backend
+  template:
+    metadata:
+      labels:
+        app: ludo-backend
+    spec:
+      containers:
+        - name: backend
+          image: ludo-backend:latest
+          env:
+            - name: DATABASE_URL
+              value: postgres://ludo:ludo@ludo-db:5432/ludo?sslmode=disable
+          ports:
+            - containerPort: 8080

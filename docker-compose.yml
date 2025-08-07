@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ludo
+      POSTGRES_PASSWORD: ludo
+      POSTGRES_DB: ludo
+    ports:
+      - "5432:5432"
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgres://ludo:ludo@db:5432/ludo?sslmode=disable
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
